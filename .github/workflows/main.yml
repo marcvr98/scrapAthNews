@@ -28,20 +28,30 @@ jobs:
         id: leer_resultado
         run: echo "resultado=$(cat resultado.txt)" >> $GITHUB_OUTPUT
       
-      # ----- PASO MODIFICADO AQUÍ -----
-      - name: Enviar notificación por Telegram
-        # Se ejecuta solo si el resultado fue 'true'
-        if: steps.leer_resultado.outputs.resultado == 'true'
-        # Usamos una acción popular para Telegram
+      - name: Enviar notificación por Telegram si hay nuevos partidos
+        if: steps.leer_resultado.outputs.resultado != ''
         uses: appleboy/telegram-action@master
         with:
-          # Usamos los Secrets que acabamos de crear
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          # Mensaje que recibirás. Puedes personalizarlo como quieras.
           message: |
-            🦁 Noticias sobre el partido del Newcastle! 🦁
+            🦁 ¡Nuevas noticias del Athletic Club! 🦁
             
-            El script ha encontrado una noticia que menciona a "Newcastle".
+            Se han encontrado noticias sobre los siguientes equipos: *${{ steps.leer_resultado.outputs.resultado }}*
             
             Revisa la web aquí: https://www.athletic-club.eus/noticias/club/1
+
+      # ----- PASOS NUEVOS PARA GUARDAR LA "MEMORIA" -----
+      - name: Guardar cambios en el repositorio
+        # Este paso solo se ejecuta si se encontraron nuevos equipos
+        if: steps.leer_resultado.outputs.resultado != ''
+        run: |
+          # Configuramos Git para poder hacer commits
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          # Añadimos el archivo de estado al commit
+          git add notified_teams.txt
+          # Hacemos el commit solo si hay cambios
+          git commit -m "CI: Actualiza la lista de equipos notificados" || echo "No hay cambios que guardar."
+          # Subimos los cambios al repositorio
+          git push
