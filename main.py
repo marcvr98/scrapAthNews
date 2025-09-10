@@ -17,7 +17,7 @@ def encontrada():
             noticias = main_div.find_all('a')
             for noticia in noticias:
                 texto_h3 = noticia.find('h3')
-                if texto_h3 and 'Newcastle' in texto_h3.get_text():
+                if texto_h3 and 'Dortmund' in texto_h3.get_text():
                     return True # Se encontró la palabra
         return False # No se encontró la palabra después de buscar en todo
     except requests.RequestException as e:
