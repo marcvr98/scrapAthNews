@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 equipos = ['Mallorca', 'Newcastle', 'Dortmund', 'Qaraba']
 
-STATE_FILE = "notified_temas.txt"
+STATE_FILE = "notified_teams.txt"
 
 def leer_notificados():
     try:
