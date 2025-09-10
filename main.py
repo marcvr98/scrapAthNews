@@ -25,3 +25,7 @@ def encontrada():
                     if 'Newcastle' in texto.get_text():
                         return True
             return False
+
+
+if __name__ == "__main__":
+    encontrada()
