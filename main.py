@@ -55,6 +55,6 @@ if __name__ == "__main__":
     nuevos, todos = encontrar(notificados_previamente)
     if nuevos:
         # Imprimimos solo los nuevos para que el workflow los envíe
-        print(", ".join(nuevos_partidos))
+        print(", ".join(nuevos))
         # Actualizamos nuestro archivo de "memoria" con todos los que hay ahora
-        actualizar_notificados(todos_los_partidos)
+        actualizar(todos)
