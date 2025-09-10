@@ -29,7 +29,7 @@ def encontrar(notificados):
         if main_div:
             noticias = main_div.find_all('a')
             for noticia in noticias:
-                texto_h3 = noticia.find('h3)
+                texto_h3 = noticia.find('h3')
                 if texto_h3:
                     texto = texto_h3.get_text()
                     for equipo in equipos:
