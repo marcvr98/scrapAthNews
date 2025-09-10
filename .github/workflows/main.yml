@@ -22,7 +22,7 @@ jobs:
       
       - name: Ejecutar script de búsqueda
         id: busqueda
-        run: python buscar_noticia.py > resultado.txt
+        run: python main.py > resultado.txt
 
       - name: Leer resultado
         id: leer_resultado
