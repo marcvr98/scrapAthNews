@@ -1,0 +1,36 @@
+name: Buscar Noticia del Athletic Club
+
+on:
+  schedule:
+    # Se ejecuta cada 15 minutos entre las 7h y las 11h UTC (9h y 13h de España)
+    - cron: '*/15 7-11 * * *'
+  workflow_dispatch: # Permite ejecutarlo manualmente
+
+jobs:
+  buscar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+      
+      - name: Ejecutar script de búsqueda
+        id: busqueda
+        run: python .py > resultado.txt
+
+      - name: Leer resultado
+        id: leer_resultado
+        run: echo "resultado=$(cat resultado.txt)" >> $GITHUB_OUTPUT
+
+      - name: ¡Noticia Encontrada!
+        if: steps.leer_resultado.outputs.resultado == 'true'
+        run: |
+          echo "¡Se ha encontrado la noticia sobre el Newcastle!"
+          echo "Aquí podrías añadir los pasos para enviar una notificación, un email, etc."
