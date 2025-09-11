@@ -3,7 +3,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-equipos = ['Mallorca', 'Newcastle', 'Dortmund', 'Qaraba']
+equipos = ['Mallorca', 'Newcastle', 'Qaraba', 'Madrid', 'Barcelona', 'Real Sociedad', 'Sporting', 'PSG', 'Paris', 'Dortmund', 'Celta', 'Villarreal']
 
 STATE_FILE = "notified_teams.txt"
 
@@ -18,7 +18,7 @@ def leer_notificados():
         
 
 def encontrar(notificados):
-    url = "https://www.athletic-club.eus/noticias/club/1"
+    url = "https://www.athletic-club.eus/noticias/todas/1"
     equipos_encontrados_en_web = set()
     try:
         response = requests.get(url)
@@ -33,11 +33,8 @@ def encontrar(notificados):
                 if texto_h3:
                     texto = texto_h3.get_text()
                     for equipo in equipos:
-                        if equipo in texto:
-                            if equipo == "Qaraba":
-                                equipos_encontrados_en_web.add("Qarabag")
-                            else:
-                               equipos_encontrados_en_web.add(equipo)
+                        if equipo in texto and 'Club Athletic' in texto:
+                            equipos_encontrados_en_web.add(equipo)
         nuevos = equipos_encontrados_en_web - notificados
         return list(nuevos), list(equipos_encontrados_en_web)
     except requests.RequestException as e:
