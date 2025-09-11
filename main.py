@@ -3,7 +3,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-equipos = ['Mallorca', 'Newcastle', 'Qaraba', 'Madrid', 'Barcelona', 'Real Sociedad', 'Sporting', 'PSG', 'Paris', 'Dortmund', 'Celta', 'Villarreal']
+equipos = ['Mallorca', 'Newcastle', 'Qarabağ', 'Madrid', 'Barcelona', 'Real Sociedad', 'Sporting', 'PSG', 'Paris', 'Dortmund', 'Celta', 'Villarreal']
 
 STATE_FILE = "notified_teams.txt"
 
