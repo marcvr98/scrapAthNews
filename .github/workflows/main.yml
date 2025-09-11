@@ -39,9 +39,9 @@ jobs:
           message: |
             🦁 ¡Nuevas noticias del Athletic Club! 🦁
             
-            Se han encontrado noticias sobre los siguientes equipos: *${{ steps.leer_resultado.outputs.resultado }}*
+            Se han encontrado noticias sobre entradas para el partido contra el ${{ steps.leer_resultado.outputs.resultado }}
             
-            Revisa la web aquí: https://www.athletic-club.eus/noticias/club/1
+            Revisa la web aquí: https://www.athletic-club.eus/noticias/todas/1
 
       # ----- PASOS NUEVOS PARA GUARDAR LA "MEMORIA" -----
       - name: Guardar cambios en el repositorio
